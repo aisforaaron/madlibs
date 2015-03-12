@@ -7,14 +7,39 @@ from stories import *
 # get all story titles
 allTitles = madlibStories.keys()
 
+# get all story text by numeric key
+allStories = madlibStories.values()
+
 # ask user to pick a story title
 titles = ''
+counter=1
 for title in allTitles:
-	titles += '-'+title+'\n'
-storyTitle = raw_input("Pick a story by entering the title\n" + titles + ": ")
+	titles += str(counter)+' - '+title+'\n'
+	counter += 1
+
+# loop until user picks a correct title value
+while True:
+	storyNum = raw_input("Pick a story number:\n" + titles + "> ")
+
+	if(storyNum.isdigit() and storyNum!='0'):
+		storyNum = int(storyNum)
+	else:		
+		print "Please enter a number next to the story title."
+		continue
+
+	if(storyNum>len(allTitles)):
+		print "Wrong number buddy! Try again and pick one from the list."
+	else:
+		break
+
+# because of zero key
+storyNum -=1 
 
 # get story text w/tokens (imported from stories.py)
-storyText = madlibStories[storyTitle]
+storyText = allStories[storyNum]
+
+# get story title chosen
+storyTitle = allTitles[storyNum]
 
 # split story text into lines by line break delimeter (splitlines method)
 storyLines = storyText.splitlines()

@@ -45,16 +45,24 @@
       sudo: yes
       action: apt name=heroku-toolbelt state=latest update_cache=yes cache_valid_time=86400
 
-    # postgreSQL db
-    # ???
+    # postgreSQL db and user
+    - name: Create psql database 
+      sudo: yes
+      sudo_user: postgres
+      postgresql_db: name=madlibs
 
-    # postgre db user
-    # madlibs db name
-    # muser
-    # mpass
+    - name: Create database user
+      sudo: yes
+      sudo_user: postgres
+      postgresql_user: db=madlibs name=muser password=mpass priv=ALL
 
+    #- name: Ensure user does not have unnecessary privilege
+    #  postgresql_user: name=muser role_attr_flags=NOSUPERUSER,NOCREATEDB
 
-  #handlers:
+  handlers:
+    - name: restart postgresql
+      service: name=postgresql state=restarted
+
   #  - name: restart apache2
   #    service: name=apache2 state=restarted
   #

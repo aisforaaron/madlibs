@@ -14,9 +14,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Secret key and other settings are stored in heroku config vars
 # See README.md for details and install steps
-SECRET_KEY = os.environ['MADLIBS_SECRET_KEY']
-DEBUG = os.environ['MADLIBS_DEBUG']
-TEMPLATE_DEBUG = os.environ['MADLIBS_TEMPLATE_DEBUG']
+
+SECRET_KEY = '^=4srp3k_ec0-=d7zb0t+s&&vlhv#r_eaha%ti6*7&5!!ajmrk' 
+#SECRET_KEY = os.environ['MADLIBS_SECRET_KEY']
+
+DEBUG = True
+#DEBUG = os.environ['MADLIBS_DEBUG']
+
+TEMPLATE_DEBUG = True
+#TEMPLATE_DEBUG = os.environ['MADLIBS_TEMPLATE_DEBUG']
+
 ALLOWED_HOSTS = []
 
 

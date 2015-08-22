@@ -1,0 +1,16 @@
+Select a story:
+
+<HR>
+
+<form action="/story/" method="post">
+{% csrf_token %}
+{% for s in story_list %}
+    <input type="radio" name="choice" id="choice{{ s.id }}" value="{{ s.id }}" />
+    <label for="choice{{ s.id }}">{{ s.story_title }}</label><br />
+{% endfor %}
+<input type="submit" value="Play!" />
+</form>
+
+<HR>
+
+<a href="/admin">Admin</a>

@@ -1,0 +1,20 @@
+Replace tokens with words:
+
+<HR>
+
+<form action="/done/" method="post">
+{% csrf_token %}
+<input type="hidden" name="story_num" value="{{ story_num }}">
+
+Enter each:<BR>
+{% for key, value in tokens.items %}
+    <input type="text" name="{{ key }}" value="">
+    <label for="{{ key }}">{{ value }}</label><br />
+{% endfor %}
+
+<input type="submit" value="Play!" />
+</form>
+
+<HR>
+
+<a href="/"><< Start over</a> | <a href="/admin">Admin</a>

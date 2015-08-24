@@ -1,29 +1,34 @@
-# madlibs
-Madlibs game.
+## Madlibs on Heroku
+
+### Local Installation
 
 
-# Overview
-MadLibs is a script where you can create a file of stories with tokens,
-then have the script ask the user which story to play and prompt with
-tokens to replace.
+Clone repo into a local folder
 
+Install all dependencies
 
-# Adding Stories
-Stories should be added to the stories.py file like so:
+- Ansible, http://ansible.com
+- Heroku, http://heroku.com
+- Virtualbox, http://virtualbox.org
+- Vagrant, http://vagrantup.com 
+- Base box ubuntu/trusty64 from https://atlas.hashicorp.com/search
 
-```python
-madlibStories = {
+Open a terminal session and run commands
 
-	'Title Test' : '''Test story is the {adjective}!''',
+    $ cd madlibs
+    $ vagrant up
 
-	'Title of your story' : '''Content of your story.
+After Ansible provisions the new VM, run
 
+    $ vagrant ssh
+    $ cd /vagrant_data/devops
+    $ sh localsetup.sh
 
-You can add line breaks. This is how you add tokens for a {verb} and {noun} or {plural-noun}.''',
+*This will prompt you to create an admin user, then start the local server.
 
-}
-```
+View site in a web browser (while server is running in terminal)
+    http://192.168.33.53:8000
 
-# How to play
-Run this script from the command line:
-	<code>$ python madlibs.py</code>
+To stop server, enter Control+C in Terminal
+To stop vagrant, type exit, then vagrant halt
+To remove VM completely, vagrant destroy

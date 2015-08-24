@@ -1,0 +1,15 @@
+- fields: {story_body: "I remember I put on my {noun},\r\nI remember I put on my {noun}.\r\
+      \nI remember I put on my {noun}\r\nThat was printed\r\nIn beautiful {color}\
+      \ and {color}.\r\nI remember I put on my coat,\r\nTo look {adverb} grand at\
+      \ the dance,\r\nYet I feel there is something\r\nI may have forgot\u2014\r\n\
+      What is it? What is it?...", story_title: Something Missing}
+  model: stories.story
+  pk: 1
+- fields: {story_body: "Her mama said, \u201CDon\u2019t eat with your {noun}.\u201D\
+      \r\n\u201COK,\u201D said {adverb} Rose,\r\nSo she ate with her toes.", story_title: Ridiculous
+      Rose}
+  model: stories.story
+  pk: 2
+- fields: {story_body: 'just a {noun}', story_title: Test}
+  model: stories.story
+  pk: 3

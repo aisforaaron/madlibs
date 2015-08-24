@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 import os
+import dj_database_url
+
 #BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) #heroku setting?
 
@@ -89,11 +91,8 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
-
 # Database
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-
+'''
 # if 'DATABASE_URL' does no exist, then it's local machine
 if not os.environ.has_key('DATABASE_URL'):
     DATABASES = {
@@ -107,7 +106,8 @@ if not os.environ.has_key('DATABASE_URL'):
         }
     }
 else:
-    DATABASES['default'] =  dj_database_url.config()
+    '''
+DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

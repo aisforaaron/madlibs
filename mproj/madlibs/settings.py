@@ -2,15 +2,16 @@
 Django settings for madlibs project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
+https://docs.djangoproject.com/en/1.8/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
+https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+#BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) #heroku setting?
+
 
 # Secret key and other settings are stored in heroku config vars
 # See README.md for details and install steps
@@ -24,7 +25,9 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 #TEMPLATE_DEBUG = os.environ['MADLIBS_TEMPLATE_DEBUG']
 
-ALLOWED_HOSTS = []
+# Allow all host headers
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -54,22 +57,7 @@ ROOT_URLCONF = 'madlibs.urls'
 WSGI_APPLICATION = 'madlibs.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'madlibs',
-        'USER': 'muser',
-        'PASSWORD': 'mpass',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
-
 # Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -83,24 +71,43 @@ USE_TZ = True
 
 
 
-
-# HEROKU SETTINGS THAT WORK ----------------------- ///
+# Heroku Host Settings
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
-# also https://devcenter.heroku.com/articles/django-assets
 
 STATIC_URL = '/static/'
 
-# exmaple: STATIC_ROOT = '/vagrant_data/pydev.local/static/'
 STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = (
-    # why is this madlibs/static not just static?
-    os.path.join(BASE_DIR, 'madlibs/static'),
+    #os.path.join(BASE_DIR, 'madlibs/static'),
+    os.path.join(BASE_DIR, 'static'),  #heroku setting?
 )
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+
+
+# Database
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+
+# if 'DATABASE_URL' does no exist, then it's local machine
+if not os.environ.has_key('DATABASE_URL'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'madlibs',
+            'USER': 'muser',
+            'PASSWORD': 'mpass',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
+else:
+    DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

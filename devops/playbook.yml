@@ -3,13 +3,11 @@
 - hosts: all
   sudo: yes
   vars:
-    #varname: 'value'
     django_dir: '/vagrant_data/mproj'
   tasks:
     - name: install packages
       apt: name={{ item }} update_cache=yes state=latest
       with_items:
-        # need webserver?
         - python-pip
         - python-dev 
         - postgresql
@@ -24,8 +22,6 @@
     - pip: name=pyyaml
     - pip: name=django version=1.8.4 state=present
     - pip: name=whitenoise
-    #- pip: name=requests
-    #- pip: name=Sphinx
 
     # heroku toolbelt
     - name: Install python-software-properties for apt-add-repository command

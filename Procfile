@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath mproj madlibs.wsgi --log-file -
+web: python mproj/manage.py run_gunicorn -b "0.0.0.0:$PORT" -w 3 --log-file -

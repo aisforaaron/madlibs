@@ -92,8 +92,8 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 # Database
-'''
 # if 'DATABASE_URL' does no exist, then it's local machine
+DATABASES = {}
 if not os.environ.has_key('DATABASE_URL'):
     DATABASES = {
         'default': {
@@ -106,8 +106,7 @@ if not os.environ.has_key('DATABASE_URL'):
         }
     }
 else:
-    '''
-DATABASES['default'] =  dj_database_url.config()
+    DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

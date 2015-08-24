@@ -1,1 +1,1 @@
-web: gunicorn mproj/madlibs.wsgi --log-file -
+web: gunicorn --pythonpath mproj madlibs.wsgi --log-file -

@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 import os
-import dj_database_url
 
 #BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) #heroku setting?
@@ -42,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'stories',
-    'gunicorn'
+    #'gunicorn' # not sure if i need this for heroku
 )
 
 MIDDLEWARE_CLASSES = (
@@ -107,6 +106,7 @@ if not os.environ.has_key('DATABASE_URL'):
         }
     }
 else:
+    import dj_database_url
     DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()

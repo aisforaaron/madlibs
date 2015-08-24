@@ -1,1 +1,1 @@
-web: gunicorn madlibs.wsgi --log-file -
+web: gunicorn mproj/madlibs.wsgi --log-file -

@@ -1,34 +1,40 @@
 ## Madlibs on Heroku
+Django app to run on local VM for dev and Heroku
 
-### Local Installation
+*See madlibs-devops repo readme for local setup steps.
 
 
-Clone repo into a local folder
+## Heroku Setup
 
-Install all dependencies
+After you spin up the madlibs-devops VM
 
-- Ansible, http://ansible.com
-- Heroku, http://heroku.com
-- Virtualbox, http://virtualbox.org
-- Vagrant, http://vagrantup.com 
-- Base box ubuntu/trusty64 from https://atlas.hashicorp.com/search
-
-Open a terminal session and run commands
-
-    $ cd madlibs
+    $ cd madlibs-devops
     $ vagrant up
+    $ vagrant ssh  (run heroku commands from inside VM - that's where heroku toolbelt is installed)
+    $ cd madlibs
+    $ heroku login
 
-After Ansible provisions the new VM, run
+Make sure heroku remote is setup
 
-    $ vagrant ssh
-    $ cd /vagrant_data/devops
-    $ sh localsetup.sh
+    $ git remote -v 
+    if not 
+    $ heroku create
+
+Push code to heroku server via git
+
+    $ git push heroku master
+
+Manual steps to setup Heroku app (setup db, create admin user and load app data)
+
+    $ heroku run python manage.py migrate
+    $ heroku run python manage.py createsuperuser --username=admin --email=admin@localhost
+    $ heroku run python manage.py loaddata stories.yaml
 
 *This will prompt you to create an admin user, then start the local server.
 
 View site in a web browser (while server is running in terminal)
-    http://192.168.33.53:8000
+    http://*your-heroku-app-name*.herokuapp.com
 
-To stop server, enter Control+C in Terminal
-To stop vagrant, type exit, then vagrant halt
-To remove VM completely, vagrant destroy
+You can run additional remote commands from inside the VM
+
+    $ heroku logs
